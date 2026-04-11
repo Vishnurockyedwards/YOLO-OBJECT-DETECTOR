@@ -1,0 +1,1 @@
+# Placeholder for detect_image.py

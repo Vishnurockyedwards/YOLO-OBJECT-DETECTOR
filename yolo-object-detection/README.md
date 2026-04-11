@@ -48,6 +48,17 @@ python src/detect_webcam.py
 python src/detect_video.py --video input/sample.mp4 --output output/result.mp4
 ```
 
+## Jupyter Notebook
+
+Place one or more sample images into the `input/` folder and open:
+```bash
+jupyter notebook notebooks/exploration.ipynb
+```
+
+The notebook walks through model inspection, preprocessing visualization,
+threshold experiments, IoU visualization, speed benchmarking, and class
+distribution analysis.
+
 ## Project Structure
 
 ```

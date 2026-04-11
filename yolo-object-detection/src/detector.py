@@ -7,13 +7,21 @@ objects for downstream visualization and evaluation.
 """
 
 import logging
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+ROOT = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from ultralytics import YOLO
 
-from .config import CLASSES_FILE, INPUT_SIZE
+try:
+    from .config import CLASSES_FILE, INPUT_SIZE
+except ImportError:
+    from config import CLASSES_FILE, INPUT_SIZE
 
 logger = logging.getLogger(__name__)
 

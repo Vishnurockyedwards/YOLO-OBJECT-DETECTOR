@@ -7,12 +7,20 @@ normalization, and blob creation for OpenCV DNN.
 """
 
 import logging
+import sys
 from pathlib import Path
 from typing import Tuple, Union, Dict, Any
 import cv2
 import numpy as np
 
-from .config import INPUT_SIZE
+ROOT = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+try:
+    from .config import INPUT_SIZE
+except ImportError:
+    from config import INPUT_SIZE
 
 logger = logging.getLogger(__name__)
 

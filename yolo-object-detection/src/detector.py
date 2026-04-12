@@ -81,10 +81,17 @@ class YOLODetector:
 
     def _load_class_names(self) -> Dict[int, str]:
         """
-        Load COCO class names from the configured classes file.
+        Load class names from the model's built-in names, or fall back to a
+        classes file.
 
-        If the file is missing, fall back to the model's built-in names.
+        The model's built-in names are preferred because they always match the
+        model's class IDs (important when switching between COCO and Open Images).
         """
+        if hasattr(self.model, "names") and isinstance(self.model.names, dict):
+            names = {int(k): v for k, v in self.model.names.items()}
+            logger.info(f"Loaded {len(names)} class names from model")
+            return names
+
         try:
             class_file = Path(CLASSES_FILE)
             if class_file.exists():
@@ -93,10 +100,7 @@ class YOLODetector:
                     logger.info(f"Loaded {len(names)} class names from {class_file}")
                     return {index: name for index, name in enumerate(names)}
         except Exception:
-            logger.warning("Failed to load class names from CLASSES_FILE, using model names")
-
-        if hasattr(self.model, "names") and isinstance(self.model.names, dict):
-            return {int(k): v for k, v in self.model.names.items()}
+            logger.warning("Failed to load class names from CLASSES_FILE")
 
         logger.warning("Unable to load class names; falling back to empty names")
         return {}

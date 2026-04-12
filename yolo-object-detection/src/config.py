@@ -7,8 +7,8 @@ This module contains all configurable parameters used throughout the project.
 from pathlib import Path
 
 # Model configuration
-MODEL_PATH = Path("models/yolov8n.pt")  # Path to YOLOv8 nano model weights
-CLASSES_FILE = Path("models/coco.names")  # Path to COCO class names file
+MODEL_PATH = Path("models/yolov8n-oiv7.pt")  # Path to YOLOv8 nano Open Images V7 model (600+ classes)
+CLASSES_FILE = Path("models/coco.names")  # Fallback file; model's built-in names are used for OIV7
 
 # Detection thresholds
 CONFIDENCE_THRESHOLD = 0.5  # Minimum confidence score to keep a detection
